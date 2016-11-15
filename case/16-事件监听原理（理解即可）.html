@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script>
+    var box = document.getElementsByClassName("box")[0];
+    //    box.onclick = fn1;
+    function fn1(){
+        console.log("回头语小姑，莫嫁如兄夫");
+    }
+    function fn2(){
+        console.log("相看两不厌，只有敬亭山");
+    }
+    function fn3(){
+        console.log("鹏程万里风做使，鱼跃四海浪为依");
+    }
+    function fn(str,x,ele){
+        num = 1;
+        var oldEvent = ele["on"+str];
+        ele["on"+str] = function () {
+            if(oldEvent){
+                oldEvent();
+                num++;
+                console.log(num);
+                x();
+            }else{
+                num++;
+                console.log(num);
+                x()
+            }
+        }
+    }
+
+
+    fn("click",fn1,box);
+
+    fn("click",fn2,box);
+
+    fn("click",fn3,box);
+
+
+
+</script>
+
+</body>
+</html>

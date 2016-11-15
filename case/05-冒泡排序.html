@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var arr = [1,2,5,9,6,4,49,55,82];
+    for(var i=0;i<arr.length-1;i++){
+        flag = 1;
+        for(var j=0;j<arr.length-1-i;j++){
+            if(arr[j]>arr[j+1]){
+                var temp = arr[j+1];
+                arr[j+1]=arr[j];
+                arr[j]=temp;
+                flag = 0;
+            }
+        }
+        if(flag){
+            break;
+        }
+    }
+    console.log(arr);
+
+
+</script>
+
+</body>
+</html>

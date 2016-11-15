@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //关键点  闰年  数组放置每个月的天数
+    //主要 理解优先级
+    function getDays(x,y,z){
+        var arr = [31,28,31,30,31,30,31,31,30,31,30];
+        for(var i=1;i<y;i++){
+            z+=arr[i];
+        }
+        if((x%400==0||x%4==0&&x%100!=0)&&y>2){
+            z+=1;
+        }
+        return z;
+    }
+    console.log(getDays(2015, 5, 27));
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .box {
+            width: 500px;
+            margin: 200px auto;
+        }
+        ul {
+            width: 392px;
+            padding: 5px;
+            list-style: none;
+            border: 1px solid red;
+        }
+        li:hover {
+            background-color: red;
+        }
+        input {
+            width: 400px;
+        }
+        button {
+            width: 70px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <input type="text"/>
+    <button>索搜</button>
+    <!--<ul>-->
+    <!--<li>aaaa</li>-->
+    <!--<li>bbb</li>-->
+    <!--<li>ccc</li>-->
+    <!--</ul>-->
+</div>
+
+
+<script>
+    //    数据库
+    var arr =  ["a","aa","aaa","ab","abc","abcd","adfff","aag","aeeead","aadgse","adagsjjugiu"];
+    var box = document.getElementsByClassName("box")[0];
+    var inp = box.getElementsByTagName("input")[0];
+    var btn = box.getElementsByTagName("button")[0];
+    inp.onkeyup = function () {
+        if(box.children[2]){
+            box.removeChild(box.children[2]);
+        }
+        var arrNew = [];
+        for(var i = 0;i<arr.length;i++){
+            if(arr[i].indexOf(this.value)==0){
+                arrNew.push("<li>"+arr[i]+"</li>");
+            }
+        }
+        if(inp.value.length==0||arrNew.length==0){
+            return;
+        }
+        var ul = document.createElement("ul");
+        var str = arrNew.join("");
+        ul.innerHTML = str;
+        box.appendChild(ul);
+        var arr1 = box.children[2].children;
+        for(var i=0;i<arr1.length;i++){
+            arr1[i].onclick = function () {
+                inp.value = this.innerHTML;
+                box.children[2].style.display = "none";
+            }
+        }
+
+    }
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 50px;
+				height: 50px;
+				background: green;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+		</div>
+		<div>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+		</div>
+		<div>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+		</div>
+		<div>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+		</div>
+		<div>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+		</div>
+		<div>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+		</div>
+		<div>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+		</div>
+		<div>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+			<p><a href=""></a><a href=""></a></p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function getAllChildNodes (ele) {
+			var nodes=ele.children;
+			var allNodes=[];
+			nodes=[].concat.apply([],nodes);
+			nodes.forEach(function  (value,index) {
+				allNodes.push(value);
+				var temp=getAllChildNodes(value);
+				allNodes=allNodes.concat(temp);
+			})
+			return allNodes;
+		}
+		var eles=getAllChildNodes(document.body);
+		console.log(eles);
+		eles.forEach(function  (value,index) {
+			value.style.border='1px  solid red'
+		})
+	</script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button>anniu</button>
+
+<script>
+    var btn = document.getElementsByTagName("button")[0];
+    var EventListen = {
+        addEvent:function(ele,fn,str){
+            if(ele.addEventListener){
+                ele.addEventListener(str,fn)
+            }else if(ele.attachEvent){
+                ele.attachEvent(str,fn);
+            }else {
+                ele["on"+str]=fn;
+            }
+        },
+        removeEvent: function (ele,fn,str) {
+            if(ele.removeEventListener){
+                ele.removeEventListener(str,fn);
+            }else if(ele.detachEvent){
+                ele.detachEvent();
+            }else {
+                ele["on"+str]=null;
+            }
+        }
+    }
+
+    function fn1(){
+        console.log(1);
+    }
+    EventListen.addEvent(btn,fn1,"click");
+    EventListen.removeEvent(btn,fn1,"click");
+
+    var div=document.querySelector('div')
+    setInterval(function () {
+        div.onclick=function () {
+
+        }
+    },10)
+
+</script>
+
+</body>
+</html>

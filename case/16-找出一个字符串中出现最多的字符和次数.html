@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    //    判断一个字符串中出现次数最多的字符，统计这个次数
+    var str = "abcoefoxyozzopp";
+    var json = {};
+    for(var i = 0; i< str.length;i++){
+        if(!json[str.charAt(i)]){
+            json[str.charAt(i)]=1;
+        }else{
+            json[str.charAt(i)]+=1;
+        }
+    }
+    var key="";
+    var keyValue=0;
+    for(var k in json){
+        if(json[k]>keyValue){
+            keyValue = json[k];
+            key = k;
+        }
+    }
+    console.log("出现最多的字符为：" + key + ",出现了"+keyValue+"次");
+
+
+</script>
+
+</body>
+</html>

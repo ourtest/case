@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //翻转思路1倒叙添加到另一个数组；2数组首末对应项对调
+    var arr = [1,5,9,8,7,6,5,4,2,8,2,5,5,4];
+    //方法1
+//    console.log(arr);
+    var arrNew = [];
+    for(var i =arr.length-1; i>=0;i--){
+        arrNew.push(arr[i]);
+    }
+    console.log(arrNew);
+    //    方法二
+//    console.log(arr);
+    for(var i=0;i<arr.length/2;i++){
+        var temp = arr[i];
+        arr[i]=arr[arr.length-1-i];
+        arr[arr.length-1-i]=temp;
+    }
+    console.log(arr);
+</script>
+
+</body>
+</html>

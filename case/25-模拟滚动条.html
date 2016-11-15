@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            width: 300px;
+            height: 500px;
+            border: 1px solid red;
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .scroll {
+            width: 20px;
+            height: 500px;
+            background-color: #ccc;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .bar {
+            width: 20px;
+            background-color: red;
+            border-radius: 10px;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+        }
+        .content {
+            padding: 15px;
+        }
+    </style>
+
+    <script src="tool.js"></script>
+    <script>
+        window.onload = function () {
+            var box = document.getElementById("box");
+            var content = box.children[0];
+            var scrollBar = box.children[1];
+            var bar = scrollBar.children[0];
+            bar.style.height = scrollBar.scrollHeight*box.offsetHeight/content.offsetHeight+"px";
+            var y=0;
+            var y1=0;
+            bar.onmousedown = function (event) {
+                event = event || window.event;
+                y = event.pageY || scroll().top+event.clientY;
+                y1 = bar.offsetTop;
+                document.onmousemove = function (event) {
+                    event = event || window.event;
+                    var pagey = event.pageY || event.clientY + scroll().top;
+                    var yValue = pagey-y+y1;
+                    if(yValue<0){
+                        yValue=0;
+                    }
+                    if(yValue>scrollBar.offsetHeight-bar.offsetHeight){
+                        yValue=scrollBar.offsetHeight-bar.offsetHeight;
+                    }
+                    var conY = yValue*(content.offsetHeight-box.offsetHeight)/(scrollBar.offsetHeight-bar.offsetHeight)
+                    bar.style.top = yValue +"px";
+                    content.style.marginTop = -conY +"px";
+                    window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+
+                }
+            }
+            document.onmouseup = function () {
+                document.onmousemove = null;
+            }
+
+
+
+        }
+    </script>
+
+</head>
+<body>
+<div class="box" id="box">
+    <div class="content">
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        孩儿励志出湘关，学不成名终不还。<br>
+        埋骨何须桑梓地，人生无处不青山。<br>
+        -------------结束------------<br>
+    </div>
+    <div class="scroll">
+        <div class="bar"></div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

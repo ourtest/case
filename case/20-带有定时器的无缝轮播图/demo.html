@@ -1,0 +1,207 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: 0;
+        }
+
+        .all {
+            width: 500px;
+            height: 200px;
+            padding: 7px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .screen {
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .screen li {
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            float: left;
+        }
+
+        .screen ul {
+            position: absolute;
+            left: 0;
+            top: 0px;
+            width: 3000px;
+        }
+
+        .all ol {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            line-height: 20px;
+            text-align: center;
+        }
+
+        .all ol li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .all ol li.current {
+            background: yellow;
+        }
+
+        #arr {
+            display: none;
+        }
+
+        #arr span {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            margin-top: -20px;
+            background: #000;
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-family: '黑体';
+            font-size: 30px;
+            color: #fff;
+            opacity: 0.3;
+            border: 1px solid #fff;
+        }
+
+        #arr #right {
+            right: 5px;
+            left: auto;
+        }
+
+    </style>
+
+
+</head>
+
+<body>
+<div class="all" id='all'>
+    <div class="screen" id="screen">
+        <ul id="ul">
+            <li><img src="images/1.jpg" width="500" height="200"/></li>
+            <li><img src="images/2.jpg" width="500" height="200"/></li>
+            <li><img src="images/3.jpg" width="500" height="200"/></li>
+            <li><img src="images/4.jpg" width="500" height="200"/></li>
+            <li><img src="images/5.jpg" width="500" height="200"/></li>
+        </ul>
+        <ol></ol>
+        <div id="arr"><span id="left"><</span><span id="right">></span></div>
+    </div>
+</div>
+
+
+<script>
+    var div = document.getElementById("all");
+    var screen = document.getElementById("screen");
+    var ul = document.getElementById("ul");
+    var ol = screen.children[1];
+    var divLeftRight = screen.children[2];
+    var imgArr = divLeftRight.children;
+    var arrUlLi = ul.children;
+    var newUlLi = arrUlLi[0].cloneNode(true);
+    ul.appendChild(newUlLi);
+    for (var i = 0; i < arrUlLi.length - 1; i++) {
+        var newOlLi = document.createElement("li");
+        newOlLi.innerHTML = i + 1;
+        ol.appendChild(newOlLi);
+    }
+    var arrOlLi = ol.children;
+    arrOlLi[0].className = "current";
+    for (var i = 0; i < arrOlLi.length; i++) {
+        arrOlLi[i].index = i;
+        arrOlLi[i].onmouseover = function () {
+            for (var j = 0; j < arrOlLi.length; j++) {
+                arrOlLi[j].className = "";
+            }
+            this.className = "current";
+            animateCX(ul,-this.index*imgWidth,10)
+            key=square=this.index;
+        }
+    }
+    var imgWidth = screen.offsetWidth;
+    var timer = setInterval(autoPlay, 1000);
+    div.onmouseover = function () {
+        clearInterval(timer);
+        divLeftRight.style.display = "block";
+    }
+    div.onmouseout = function () {
+        timer = setInterval(autoPlay, 1000);
+        divLeftRight.style.display = "none";
+    }
+    imgArr[1].onclick = autoPlay;
+    imgArr[0].onclick = function () {
+        key--;
+        square--;
+        if(key<0){
+            key = arrUlLi.length-2;
+            ul.style.left = -(arrUlLi.length-1)*imgWidth+"px";
+        }
+        animateCX(ul,-key*imgWidth,10);
+        if(square<0){
+            square = arrOlLi.length-1;
+        }
+        for(var i=0;i<arrOlLi.length;i++){
+            arrOlLi[i].className="";
+        }
+        arrOlLi[square].className = "current";
+
+    }
+
+
+    var square = 0;
+    var key = 0;
+    function autoPlay() {
+        square++;
+        key++
+        if (key > arrOlLi.length) {
+            key = 1;
+            ul.style.left = 0;
+        }
+        animateCX(ul, -key* imgWidth, 10)
+        if (square > arrOlLi.length - 1) {
+            square = 0;
+        }
+        for (var i = 0; i < arrOlLi.length; i++) {
+            arrOlLi[i].className = "";
+        }
+        arrOlLi[square].className = "current";
+    }
+
+
+    function animateCX(ele, target, intervalTime) {
+        clearInterval(ele.timer);
+        var speed = target > ele.offsetLeft ? 10 : -10;
+        ele.timer = setInterval(function () {
+            ele.style.left = ele.offsetLeft + speed + "px";
+            var val = target - ele.offsetLeft;
+            if (Math.abs(val) <= Math.abs(speed)) {
+                ele.style.left = target + "px";
+                clearInterval(ele.timer);
+            }
+        }, intervalTime)
+    }
+</script>
+</body>
+</html>

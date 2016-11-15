@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background: #eeeeee;
+            margin-top: 80px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<button>anniu</button>
+<script>
+    var box = document.getElementsByClassName("box")[0];
+    var json = {"left":200,"top":200,"width":200,"height":200};
+    var json2 = {"left":300,"top":300,"width":300,"height":300};
+    var json1 = {"left":100,"top":100,"width":100,"height":100};
+    var btn = document.getElementsByTagName("button")[0];
+    btn.onclick = function () {
+        animate(box,50,json,json1,json2,json1,json2);
+    }
+    function animate(ele,intervalTime,json){
+        var arr = arguments;
+        ele = arr[0];
+        intervalTime=arr[1];
+        var mark = 2;
+        json = arr[mark];
+        clearInterval(ele.timer);
+        ele.timer = setInterval(function () {
+            var flag = true;
+            for(var k in json){
+                var leader = parseInt(getStyle(ele,k))||0;
+                var step = 10;
+                step = json[k]>leader?10:-10;
+                leader = leader + step;
+                ele.style[k]= leader + "px";
+                if(Math.abs(json[k]-leader)>Math.abs(step)){
+                    flag = false;
+                }
+            }
+            if(flag){
+                for(var k in json){
+                    ele.style[k] = json[k]+"px";
+                }
+                clearInterval(ele.timer);
+                mark++;
+                if(arr[mark]){
+                    animate1(ele,intervalTime,arr[mark])
+                }
+            }
+        },intervalTime)
+        function animate1 (ele,intervalTime,json){
+            clearInterval(ele.timer);
+            ele.timer = setInterval(function () {
+                var flag = true;
+                for(var k in json){
+                    var leader = parseInt(getStyle(ele,k))||0;
+                    var step = 10;
+                    step = json[k]>leader?10:-10;
+                    leader = leader + step;
+                    ele.style[k]= leader + "px";
+                    if(Math.abs(json[k]-leader)>Math.abs(step)){
+                        flag = false;
+                    }
+                }
+                if(flag){
+                    for(var k in json){
+                        ele.style[k] = json[k]+"px";
+                    }
+                    clearInterval(ele.timer);
+                    mark++
+                    if(arr[mark]){
+                        animate1(ele,intervalTime,arr[mark])
+                    }
+                }
+            },intervalTime)
+        }
+    }
+
+    function getStyle(ele,attr){
+        if(window.getComputedStyle){
+            return window.getComputedStyle(ele,null)[attr];
+        }
+        return ele.currentStyle[attr];
+    }
+
+
+
+</script>
+
+</body>
+</html>

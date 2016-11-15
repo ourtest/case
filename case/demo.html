@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		function createCache () {
+			return function  (key,value,num) {
+				var maxlength=num ||10;
+				var arr=[];
+				var obj={};
+				if(value!==undefined){
+					obj[key]=value;
+					arr.push(key);
+					if(arr.length>maxlength){
+						delete obj[arr.shift()];
+					}
+				}else{
+					return obj[key];
+				}
+			}
+		}
+		
+		
+		
+			function createCache1 () {
+				function cache (key,value,num) {
+				var maxlength=num ||10;
+				var arr=[];
+
+				if(value!==undefined){
+					cache[key+" "]=value;
+					arr.push(key+" ");
+					if(arr.length>maxlength){
+						delete cache[arr.shift()];
+					}
+				}else{
+					return cache[key+' '];
+				}
+			}
+			return cache;
+		}
+			
+		var fibCache = createCache();
+		var shujucache = createCache();
+		fibCache(key);
+//		var arr=[1,2,3,4,5,6];
+		
+//		delete arr[5];
+//		console.log(arr);
+	</script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    function animateCX(ele,target,intervalTime){
+        clearInterval(ele.timer);
+        var speed = target>ele.offsetLeft?10:-10;
+        ele.timer=setInterval(function () {
+            ele.style.left = ele.offsetLeft+speed+"px";
+            var val = target-ele.offsetLeft;
+            if(Math.abs(val)<=Math.abs(speed)){
+                ele.style.left = target + "px";
+                clearInterval(ele.timer);
+            }
+        },intervalTime)
+    }
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+//    求给定数字的自然数累加和
+    function sum(num){
+        if(num == 1){
+            return 1;
+        }
+        return num+sum(num-1);
+    }
+console.log(sum(100));
+
+
+//    递归求斐波那契数列的第x项
+function getValue(x){
+    if(x<3){
+        return 1;
+    }
+    return getValue(x-2)+getValue(x-1);
+}
+console.log(getValue(12));
+</script>
+</body>
+</html>

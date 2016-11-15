@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body,html {
+            height: 100%;
+        }
+        ul {
+            list-style: none;
+            height: 100%;
+        }
+        ul li {
+            height: 100%;
+        }
+        ol {
+            list-style: none;
+            position: fixed;
+            top: 80px;
+            left: 50px;
+        }
+        ol li {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #000;
+            text-align: center;
+            line-height: 50px;
+            margin-top: -1px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>鞋子区域</li>
+    <li>袜子区域</li>
+    <li>裤子区域</li>
+    <li>裙子区域</li>
+    <li>帽子区域</li>
+</ul>
+<ol>
+    <li>鞋子</li>
+    <li>袜子</li>
+    <li>裤子</li>
+    <li>裙子</li>
+    <li>帽子</li>
+</ol>
+
+<script src="tool.js"></script>
+<script>
+    var ul = document.getElementsByTagName("ul")[0];
+    var ol = document.getElementsByTagName("ol")[0];
+
+    var arrUlLi = ul.children;
+    var arrOlLi = ol.children;
+    var arr = ["pink","orange","green","blue","red"];
+    for(var i=0;i<arrOlLi.length;i++){
+        arrOlLi[i].index = i;
+        arrUlLi[i].style.backgroundColor = arr[i];
+        arrOlLi[i].style.backgroundColor = arr[i];
+        var timer=null;
+        arrOlLi[i].onclick = function () {
+            var target = arrUlLi[this.index].offsetTop;
+            clearInterval(timer);
+            timer = setInterval(function () {
+                var step = (target - y)/10;
+                step = step>0?Math.ceil(step):Math.floor(step);
+                y=y+step;
+                window.scrollTo(0,y);
+                if(Math.abs(target-y)<=Math.abs(step)){
+                    window.scrollTo(0,target);
+                    clearInterval(timer);
+                }
+            },25)
+        }
+        var y=0;
+        window.onscroll = function () {
+            y=scroll().top;
+        }
+
+    }
+
+</script>
+
+
+</body>
+</html>

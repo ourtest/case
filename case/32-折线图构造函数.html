@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				border: 1px solid #9400ff;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="cvs" width="500" height="500"></canvas>
+	</body>
+	<script type="text/javascript">
+		function Oxy (ctx,padding,data) {
+			this.ctx = ctx;
+			this.padding= padding;
+			this.data = data;
+			this.ytip = {
+				x:padding.left,
+				y:padding.top
+			}
+			this.o = {
+				x:padding.left,
+				y:this.ctx.canvas.height-padding.bottom
+			}
+			this.xtip = {
+				x:this.ctx.canvas.width-padding.right,
+				y:this.ctx.canvas.height-padding.bottom
+			}
+			this._init();
+		}
+		Oxy.prototype = {
+			constructor:Oxy,
+			_init:function  () {
+				this.createoxy();
+				this.addData();
+			},
+			createoxy:function  () {
+				this.ctx.font = '700 16px/20px 微软雅黑';
+				this.ctx.moveTo(this.ytip.x,this.ytip.y);
+				this.ctx.lineTo(this.o.x,this.o.y);
+				this.ctx.lineTo(this.xtip.x,this.xtip.y);
+				this.ctx.stroke();
+				this.ctx.beginPath();
+				this.ctx.moveTo(this.ytip.x,this.ytip.y);
+				this.ctx.lineTo(this.ytip.x-5,this.ytip.y+20);
+				this.ctx.lineTo(this.ytip.x,this.ytip.y+10);
+				this.ctx.lineTo(this.ytip.x+5,this.ytip.y+20);
+                this.ctx.moveTo(this.xtip.x,this.xtip.y);
+                this.ctx.lineTo(this.xtip.x-20,this.xtip.y-5);
+                this.ctx.lineTo(this.xtip.x-10,this.xtip.y);
+                this.ctx.lineTo(this.xtip.x-20,this.xtip.y+5);
+                this.ctx.fill();
+                this.ctx.fillText('O',this.o.x-20,this.o.y+20);
+                this.ctx.fillText('Y',this.ytip.x,this.ytip.y);
+                this.ctx.fillText('X',this.xtip.x,this.xtip.y);
+			},
+			addData:function  () {
+				//等比例缩放数据
+				var that = this;
+				var arr=[],rateX,rateY;
+				this.data.forEach(function  (val,i) {
+					arr.push(val.val*1);
+				});
+				rateY=(this.o.y-this.ytip.y-20)/Math.max.apply(null,arr);
+				rateX=(this.xtip.x-this.o.x-20)/arr.length;
+				arr=arr.map(function  (val,i) {
+					return val*rateY
+				});
+				arr.forEach(function  (val,i) {
+					that.ctx.fillRect(that.o.x+i*rateX-1,that.o.y-val-1,2,2	)
+				});
+				this.ctx.beginPath();
+				arr.forEach(function  (val,i) {
+					that.ctx.lineTo(that.o.x+i*rateX,that.o.y-val);
+					that.ctx.fillText(that.data[i].name,that.o.x+i*rateX,that.o.y+20)
+				})
+				this.ctx.stroke();
+				
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		var can = document.getElementById('cvs');
+		var ctx = can.getContext('2d');
+		var padding = {
+			left:30,
+			right:20,
+			top:20,
+			bottom:40
+		}
+		var data=[{
+			name:'苹果',
+			val:80
+			},
+			{
+				name:'苹果',
+			val:600
+			},{
+				name:'苹果',
+			val:42
+			},{
+				name:'苹果',
+			val:69
+			}
+		]
+		var a=new Oxy(ctx,padding,data);
+	</script>
+</html>

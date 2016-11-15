@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//应用闭包最外层函数只执行一次的特性，让对浏览器性能的判断只执行一次，多次绑定事件是可以确定以后用的绑定事件的方法
+		function eventsRegister () {
+			if(window.addEventListener){
+				return  function  (target,type,handler) {
+					target.addEventListener(type,handler);
+				}
+			}else if(window.attachEvent){
+				return function  (target,type,handler) {
+					target.attachEvent('on'+type,function  () {
+						//attachEvent绑定事件的执行函数里面的this指向window通过上下文的方式把执行函数的this改成target 但是上下文调用模式是调用函数，所以需要把调用放到一个函数中，当这个函数触发的时候里面的函数就会并发，但是里面的执行事件非事件绑定函数，不会有event属性  需要手动添加event 由于ie支持的是window.event所以穿的参数应该为window.event
+						
+						handler.call(target,window.event);
+					})
+				}
+			}else {
+				return function  () {
+					target['on'+type]=handler;
+				}
+			}
+		}
+	</script>
+</html>

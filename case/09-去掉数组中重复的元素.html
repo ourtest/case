@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //思路：定义一个新的数组 遍历老数组 如果新数组没有该元素就添加到新数组中
+    var arr = [1,2,5,2,5,2,46,4,1,5,4];
+    var arrNew = [];
+    for(var i=0;i<arr.length;i++){
+        var flag = 1;
+        for(var j=0;j<arrNew.length;j++){
+            if(arrNew[j]==arr[i]){
+                flag = 0;
+            }
+        }
+        if(flag){
+            arrNew.push(arr[i]);
+
+        }
+    }
+    console.log(arrNew);
+
+
+</script>
+
+
+
+</body>
+</html>

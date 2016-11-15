@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//定义一个创建缓存的方法
+		function createCache (maxLength) {
+			var arr=[];
+			var count = maxLength||10;
+			
+			return function cache (key,value) {
+
+				if(value){
+					//把属性添加到函数中
+					cache[key+'']=value;
+					//把key添加到数组中
+					arr.push(key+'');
+					if(arr.length>count){
+						delet cache[arr.shift()]
+					}
+					return cache[key+''];
+				}
+			}
+		}
+		function createFib () {
+			return function fib (n) {
+			var fibCache = createCache();
+			if(fibCache(n)!==undefined){
+				return fibCache(n);
+			}
+			if(n<=2){
+				fibCache(n,1);
+				return 1;
+			}
+			var temp=fib(n-1)+fib(n-2);
+			fibCache(n,temp);
+			return temp;
+			}
+			
+			
+		}
+	</script>
+</html>
